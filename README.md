@@ -10,7 +10,7 @@
 ## Executive Summary
 This repository contains the end-to-end data preprocessing, missing value imputation, domain feature engineering, categorical encoding, and scaling pipeline for retail loan applications. 
 
-The primary business objective is to transform raw, unstructured loan applicant data into a clean, machine-learning-ready format suitable for training predictive classifiers in Week 3. By automating the credit evaluation workflow, the financial institution aims to accelerate loan turnaround times, eliminate subjective underwriting bias, and reduce Non-Performing Loans (NPLs).
+The primary business objective is to transform raw, unstructured loan applicant data into a clean, machine-learning-ready format suitable for training predictive classifiers. By automating the credit evaluation workflow, the financial institution aims to accelerate loan turnaround times, eliminate subjective underwriting bias, and reduce Non-Performing Loans (NPLs).
 
 ---
 
