@@ -1,6 +1,6 @@
 # Loan Approval Preprocessing & Feature Engineering Pipeline
 
-**Author:** Junior Data Scientist | AnalystLab Africa Consulting  
+**Author:** Ayden Demanou | Junior Data Scientist | AnalystLab Africa Consulting  
 **Client:** Retail Financial Services Division  
 **Project:** Automated Loan Eligibility Risk Scoring System  
 **Dataset:** [Kaggle Loan Prediction Problem Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)  
