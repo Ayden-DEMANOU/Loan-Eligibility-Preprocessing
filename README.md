@@ -1,64 +1,113 @@
-# Loan Approval Preprocessing & Feature Engineering Pipeline
+# Loan Eligibility Preprocessing and Feature Evaluation
 
-**Author:** Ayden Demanou | Junior Data Scientist | AnalystLab Africa Consulting  
-**Client:** Retail Financial Services Division  
-**Project:** Automated Loan Eligibility Risk Scoring System  
-**Dataset:** [Kaggle Loan Prediction Problem Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)  
+Author: Ayden Demanou, Junior Data Scientist, AnalystLab Africa Consulting
+Client Domain: Retail Financial Services
+Project Goal: Build a robust, explainable data foundation for loan approval prediction
+Dataset Source: Kaggle Loan Prediction Problem Dataset
 
----
+## Project Overview
 
-## Executive Summary
-This repository contains the end-to-end data preprocessing, missing value imputation, domain feature engineering, categorical encoding, and scaling pipeline for retail loan applications. 
+This repository contains the end-to-end analytics pipeline used across Week 2 and later phases:
+1. Data cleaning and imputation.
+2. Feature engineering guided by domain logic.
+3. Advanced EDA and hypothesis testing.
+4. Feature evaluation and selection using correlation and mutual information.
+5. Refinement of the final modelling dataset for Week 4.
 
-The primary business objective is to transform raw, unstructured loan applicant data into a clean, machine-learning-ready format suitable for training predictive classifiers. By automating the credit evaluation workflow, the financial institution aims to accelerate loan turnaround times, eliminate subjective underwriting bias, and reduce Non-Performing Loans (NPLs).
+The outcome is a refined, modelling-ready dataset with reduced redundancy and stronger business interpretability.
 
----
-
-## Directory Structure
+## Current Repository Structure
 
 ```text
-loan-eligibility-preprocessing/
-│
-├── .gitignore                          # Git ignore rules for cache & local envs
-├── README.md                           # Master project documentation
-├── requirements.txt                    # Project dependencies for reproducibility
-│
+Loan Eligibility Preprocessing/
+├── README.md
+├── requirement.txt
+├── charts/
 ├── data/
-│   ├── raw/
-│   │   └── train_u6lujuX_CVtuZ9i.csv   # Original un-preprocessed training dataset
+│   ├── train_u6lujuX_CVtuZ9i.csv
+│   ├── test_Y3wMUE5_7gLdaTN.csv
 │   └── processed/
-│       └── loan_prediction_ml_ready.csv# Final scaled, encoded & ML-ready dataset
-│
+│       ├── loan_prediction_cleaned.csv
+│       ├── loan_prediction_feature_engineered.csv
+│       ├── loan_prediction_ml_ready.csv
+│       ├── loan_prediction_refined_cleaned.csv
+│       ├── loan_prediction_refined_ml_ready.csv
+│       └── final_modelling_dataset.csv
 ├── notebooks/
-│   └── Loan_approval_prediction.ipynb # Executed Jupyter Notebook with complete workflow
-│
-├── reports/
-│   ├── Business Understanding Report Loan Eligibility Prediction.pdf # Executive business understanding memo
-│   └── Data Preprocessing Report.pdf # Technical preprocessing documentation
-│
-└── charts/
+│   ├── loan_approval_prediction.ipynb
+│   ├── advanced_eda_analysis_and_fe.ipynb
+│   └── feature_selection_evaluation.ipynb
+└── reports/
+    ├── Business Understanding Report Loan Eligibility Prediction.pdf
+    ├── Data Preprocessing Report.pdf
+    ├── Business_Insights_and_Recommendations_Report.pdf
+    └── Updated_Data_Dictionary.md
+```
 
-## Features Explained
+## Workflow Summary
 
-A. Loan Income Ratio
-**What is Loan_Income_Ratio?** It is a ratio that compares the loan amount an applicant is seeking (or has) to their total income.
-**Why is it important in loan decisions?** This ratio is a direct measure of an applicant's debt burden relative to their financial capacity. It helps lenders assess:
+### Week 2 Foundation
+- Cleaned missing values and standardized categories.
+- Built baseline engineered variables such as Total_Income and Loan_Income_Ratio.
+- Produced cleaned and ML-ready datasets.
 
-1. Affordability: A lower Loan_Income_Ratio suggests that the applicant's income can comfortably cover the loan repayment, leaving them with sufficient funds for other expenses.
-2. Risk Assessment: A higher ratio indicates a greater financial strain on the applicant. It means they are asking for a loan that represents a significant portion of their income, which increases the risk of default.
-3. Comparative Analysis: Two applicants with the same loan amount but vastly different incomes pose different levels of risk. This ratio normalizes the loan amount against income, providing a more accurate picture of their ability to manage the debt.
-In essence, Loan_Income_Ratio helps determine if the loan amount requested is sustainable for the applicant given their earning power.
+### Advanced Analysis
+- Performed advanced exploratory analysis and statistical tests.
+- Assessed variable behavior, significance, and interaction patterns.
+- Identified strong structural effects such as concentrated 360-month loan terms.
 
-B. Credit History
+### Feature Evaluation and Selection
+- Evaluated redundancy and multicollinearity using correlation analysis.
+- Ranked feature utility with mutual information.
+- Removed low-value or redundant features and retained interpretable predictors.
 
-**What is Credit_History?** In this dataset, Credit_History typically represents whether an applicant has met their past credit obligations. It's often a binary variable:
-1: Indicates a good credit history, meaning the applicant has generally repaid their previous debts on time and as agreed.
-0: Indicates a poor credit history, suggesting past defaults, late payments, or no credit history at all.
+### Dataset Refinement
+- Added Is_Standard_Term as a high-value engineered feature.
+- Applied RobustScaler to:
+	- Loan_Amount_Term
+	- Income_to_LoanTerm_Interaction
+- Produced final Week 4 modelling dataset.
 
-**Why is it important in loan decisions?** Credit_History is a strong indicator of an applicant's reliability and willingness to repay debt. Lenders use it to gauge future behavior based on past performance:
+## Final Modelling Features
 
-* Predictor of Default: Applicants with a good credit history are statistically less likely to default on new loans. Conversely, a poor credit history signals a higher risk.
-* Trust and Credibility: It establishes trust. A long history of responsible credit use tells a lender that the applicant is a credible borrower.
-* Risk Mitigation: Lenders use credit history to mitigate their risk. They are more inclined to lend to individuals with proven repayment capabilities.
-* Foundation of Financial Reputation: It's essentially an applicant's financial report card, reflecting their past handling of borrowed money.
-As we saw in the Chi-square test, Credit_History had a highly significant relationship with Loan_Status, demonstrating its paramount importance in loan approval decisions.
+The final selected predictor set is:
+1. Credit_History
+2. Loan_Amount_Term
+3. Is_Standard_Term
+4. Income_to_LoanTerm_Interaction
+5. Property_Area_Semiurban
+6. Property_Area_Urban
+7. Married
+8. Education
+9. Dependents
+
+Target variable:
+- Loan_Status (1 = Approved, 0 = Rejected)
+
+## Key Deliverables
+
+Processed datasets:
+- data/processed/loan_prediction_cleaned.csv
+- data/processed/loan_prediction_feature_engineered.csv
+- data/processed/loan_prediction_ml_ready.csv
+- data/processed/loan_prediction_refined_cleaned.csv
+- data/processed/loan_prediction_refined_ml_ready.csv
+- data/processed/final_modelling_dataset.csv
+
+Reports:
+- reports/Business Understanding Report Loan Eligibility Prediction.pdf
+- reports/Data Preprocessing Report.pdf
+- reports/Business_Insights_and_Recommendations_Report.pdf
+- reports/Updated_Data_Dictionary.md
+
+## How to Use This Repository
+
+1. Start with notebooks/loan_approval_prediction.ipynb for preprocessing flow.
+2. Review notebooks/advanced_eda_analysis_and_fe.ipynb for advanced analysis and feature engineering.
+3. Use notebooks/feature_selection_evaluation.ipynb for feature selection logic and dataset refinement.
+4. Train Week 4 models using data/processed/final_modelling_dataset.csv.
+
+## Notes
+
+- The refined dataset is intentionally parsimonious to improve stability and interpretability.
+- Some engineered features were useful analytically but excluded from final modelling due to redundancy or weak incremental information gain.
